@@ -1,2 +1,1 @@
-# bookmymovie
-bookmymovie
+# bookmyshowrepository

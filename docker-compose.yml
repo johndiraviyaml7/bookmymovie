@@ -1,0 +1,60 @@
+# Use root/example as user/password credentials
+version: '3.8'
+services:
+  mongo:
+    image: mongo:5.0
+    container_name: mongodb_container
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_DATABASE : bookingticketsdb
+      MONGO_INITDB_ROOT_USERNAME: bkpuser
+      MONGO_INITDB_ROOT_PASSWORD: bkpm0ng04b
+      MONGO_DB_USERNAME: bkpuser
+      MONGO_DB_PASSWORD: bkpm0ng04b
+    ports:
+        - 27017:27017
+    networks:
+      - bookmyshow-network
+    volumes:
+        - F:\mongo\mongodb\data:/data/db/
+        - F:\mongo\mongodb\logs:/var/logs/mongodb\data
+        - F:\mongo\mongodb\initdb.d:/docker-entrypoint-initdb.d  
+  mysqldb:
+    image: mysql:5.7
+    restart: unless-stopped
+    container_name: mysqldb_container
+    environment:
+      MYSQL_ROOT_PASSWORD : bkp2s3sh
+      MYSQL_DATABASE : bkmyshow     
+      MYSQL_USER : bkpuser
+      MYSQL_PASSWORD : bkp2s3sh
+    ports:
+      - 3307:3306      
+    networks:
+      - bookmyshow-network
+    volumes:
+      - F:\mysql:/var/lib/mysql
+  bookmyshow-users:
+    image: users-service
+    container_name: users-container
+    links:  
+     - mysqldb
+    ports:
+      - 8081:8081
+    networks:
+      - bookmyshow-network
+    depends_on:
+      - mysqldb
+  bookmyshow-theatreshows:
+    image: theatreshows-service
+    container_name: theatreshows-container
+    links:  
+     - mysqldb
+    ports:
+      - 8082:8082
+    networks:
+      - bookmyshow-network
+    depends_on:
+      - mysqldb
+networks:
+  bookmyshow-network:
