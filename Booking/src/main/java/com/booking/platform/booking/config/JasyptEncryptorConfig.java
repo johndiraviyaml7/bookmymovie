@@ -1,24 +1,20 @@
-package com.booking.platform.theatreshows.test;
+package com.booking.platform.booking.config;
 
+import org.jasypt.encryption.StringEncryptor;
 import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;
 import org.jasypt.encryption.pbe.config.SimpleStringPBEConfig;
-import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
-
-@SpringBootTest
-public class TheatreShowsApplicationTests {
-
-	@Test
-	public void contextLoads() {
-	}
+@Configuration
+public class JasyptEncryptorConfig {
 
 	@Value("${mybookingshow.app.pass.jasypt.key}")
 	private String jasyptSecret;
 	
-	@Test
-	public void passwordTestEncryptor() {
+	@Bean(name= "jasyptStringEncryptor")
+	public StringEncryptor passwordEncryptor() {
 		PooledPBEStringEncryptor encryptor= new PooledPBEStringEncryptor();
 		SimpleStringPBEConfig config= new SimpleStringPBEConfig();
 		config.setPassword(jasyptSecret); //encryptor's private key
@@ -29,14 +25,8 @@ public class TheatreShowsApplicationTests {
 		config.setSaltGeneratorClassName("org.jasypt.salt.RandomSaltGenerator");
 		config.setStringOutputType("base64");
 		encryptor.setConfig(config);
-		
-		String plainText="bkpm0ng04b";
-		System.out.println("** The encrypt bookingticketsdb bkpm0ng04b :::"+encryptor.encrypt(plainText));
-		String plainTextPw="bkp2s3sh";
-		System.out.println("** The encrypt passowrd:::"+encryptor.encrypt(plainTextPw));
-		System.out.println("**  : The encrypt passowrd:::"+encryptor.decrypt("RG700sydhRN7cPY9+5ShBg=="));
-		
-		
+		return encryptor;
 		
 	}
+
 }

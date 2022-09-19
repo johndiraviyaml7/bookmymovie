@@ -1,4 +1,4 @@
-package com.booking.platform.theatreshows.test;
+package com.booking.platform.booking.test;
 
 import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;
 import org.jasypt.encryption.pbe.config.SimpleStringPBEConfig;
@@ -8,7 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 
 @SpringBootTest
-public class TheatreShowsApplicationTests {
+public class BookingApplicationTests {
 
 	@Test
 	public void contextLoads() {
@@ -30,11 +30,11 @@ public class TheatreShowsApplicationTests {
 		config.setStringOutputType("base64");
 		encryptor.setConfig(config);
 		
-		String plainText="bkpm0ng04b";
-		System.out.println("** The encrypt bookingticketsdb bkpm0ng04b :::"+encryptor.encrypt(plainText));
+		String plainText="root";
+		System.out.println("** The encrypt username:::"+encryptor.encrypt(plainText));
 		String plainTextPw="bkp2s3sh";
 		System.out.println("** The encrypt passowrd:::"+encryptor.encrypt(plainTextPw));
-		System.out.println("**  : The encrypt passowrd:::"+encryptor.decrypt("RG700sydhRN7cPY9+5ShBg=="));
+		System.out.println("** The decrypt passowrd:::"+encryptor.decrypt("RG700sydhRN7cPY9+5ShBg=="));
 		
 		
 		

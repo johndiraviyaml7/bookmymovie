@@ -56,5 +56,16 @@ services:
       - bookmyshow-network
     depends_on:
       - mysqldb
+  bookmyshow-booking:
+    image: booking-service
+    container_name: booking-container
+    links:  
+     - mongo
+    ports:
+      - 8084:8084
+    networks:
+      - bookmyshow-network
+    depends_on:
+      - mongo 
 networks:
   bookmyshow-network:
