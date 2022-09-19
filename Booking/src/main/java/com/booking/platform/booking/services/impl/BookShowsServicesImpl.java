@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.booking.platform.booking.exception.ResourceNotFoundException;
 import com.booking.platform.booking.model.BookingShows;
@@ -14,6 +15,7 @@ import com.booking.platform.booking.repository.BookingShowsRepository;
 import com.booking.platform.booking.services.BookShowsServices;
 import com.booking.platform.booking.services.SequenceGeneratorService;
 
+@Service
 public class BookShowsServicesImpl implements BookShowsServices {
 
 	@Autowired
