@@ -13,7 +13,7 @@ import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document (collection = "BookingShows")
+@Document (collection = "BookingAllShows")
 public class BookingShows {
 
 	@Transient
@@ -22,9 +22,6 @@ public class BookingShows {
 	@Id
 	private long id;
 	
-	@NotBlank
-    @Size(max=100)
-    @Indexed(unique=true)
 	private UUID movieId;
 	private String movieName;
 	private UUID screenId;

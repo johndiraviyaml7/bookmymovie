@@ -39,7 +39,7 @@ public class BookShowsServicesImpl implements BookShowsServices {
 	}
 
 	@Override
-	public BookingShows createBookingShows(@Valid BookingShows bookingShows) {
+	public BookingShows createBookingShows( BookingShows bookingShows) {
 		
 		bookingShows.setId(sequenceGeneratorService.generateSequence(BookingShows.SEQUENCE_NAME));
 		return bookingShowsRepository.save(bookingShows);
